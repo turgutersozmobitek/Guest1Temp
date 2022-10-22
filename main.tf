@@ -35,7 +35,6 @@ resource "vcd_vapp_vm" "web1" {
 
   customization {
     enabled                    = true
-    force                      = true
     change_sid                 = true
     allow_local_admin_password = true
     auto_generate_password     = false
