@@ -19,7 +19,7 @@ resource "vcd_vapp_vm" "web1" {
     bus_type        = "paravirtual"
     size_in_mb      = var.vm_disk_size
     bus_number      = 0
-    unit_number     = 0
+    unit_number     = 1
     iops            = 0
   }
 
