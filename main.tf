@@ -9,7 +9,6 @@
   unit_number     = 0
   storage_profile = var.vdc_storage_name
   allow_vm_reboot = true
-  depends_on      = ["vcd_vapp_vm.web1"]
 }
 
 resource "vcd_vapp_vm" "web1" {
