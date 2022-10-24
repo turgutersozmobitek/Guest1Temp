@@ -50,10 +50,10 @@ variable "vm_description" {
     default     = "list"
 }    
 
-#variable "vm_admin_password" {
-#    type        = string
-#    description = "VM Admin Password*:"
-#}
+variable "vm_admin_password" {
+    type        = string
+    description = "VM Admin Password*:"
+}
 
 variable "vm_cpu" {
     type        = string
