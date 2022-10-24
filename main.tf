@@ -1,7 +1,5 @@
 #bir oluşturalım 
 
-
-
 resource "vcd_vapp_vm" "web1" {
   vapp_name     = var.vapp_name
   name          = var.vm_name
@@ -18,7 +16,7 @@ resource "vcd_vapp_vm" "web1" {
     override_template_disk {
     bus_type        = "paravirtual"
     size_in_mb      = var.vm_disk_size
-    bus_number      = 0
+    bus_number      = 1
     unit_number     = 0
   }
 
@@ -36,8 +34,9 @@ resource "vcd_vapp_vm" "web1" {
     enabled                    = true
     change_sid                 = true
     allow_local_admin_password = true
-    auto_generate_password     = false
-    admin_password             = var.vm_admin_password
+    auto_generate_password     = true
+    must_change_password_on_first_login = true
+    #admin_password             = var.vm_admin_password
     # Other customization options to override the ones from template
   }
 
