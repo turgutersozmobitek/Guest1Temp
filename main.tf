@@ -1,5 +1,17 @@
 #bir oluşturalım 
 
+ resource "vcd_vm_internal_disk" "disk1" {
+  vapp_name       = var.vapp_name
+  vm_name         = var.vm_name
+  bus_type        = "paravirtual"
+  size_in_mb      = var.vm_disk_size
+  bus_number      = 0
+  unit_number     = 0
+  storage_profile = var.vdc_storage_name
+  allow_vm_reboot = true
+  depends_on      = ["vcd_vapp_vm.web1"]
+}
+
 resource "vcd_vapp_vm" "web1" {
   vapp_name     = var.vapp_name
   name          = var.vm_name
@@ -11,7 +23,7 @@ resource "vcd_vapp_vm" "web1" {
   cpu_cores     = var.vm_cpu_core
   cpu_hot_add_enabled=true
   memory_hot_add_enabled=true
-  power_on=false
+  power_on=true
 
 
   network {
@@ -23,14 +35,10 @@ resource "vcd_vapp_vm" "web1" {
     is_primary         = true
   }
   
-    override_template_disk {
-    bus_type        = "sas"
-    size_in_mb      = var.vm_disk_size
-    bus_number      = 0
-    unit_number     = 0
-    iops            = 0
-    storage_profile = var.vdc_storage_name
-    
+  disk {
+    name        = "Disk"
+    bus_number  = 0
+    unit_number = 0
   }
   
  
@@ -38,9 +46,8 @@ resource "vcd_vapp_vm" "web1" {
     enabled                    = true
     change_sid                 = true
     allow_local_admin_password = true
-    auto_generate_password     = true
+    admin_password             = var.vm_admin_password
     must_change_password_on_first_login = true
-    #admin_password             = var.vm_admin_password
     # Other customization options to override the ones from template
   }
 
