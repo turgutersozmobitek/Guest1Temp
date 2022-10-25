@@ -1,16 +1,5 @@
 #bir oluşturalım 
 
- resource "vcd_vm_internal_disk" "disk1" {
-  vapp_name       = var.vapp_name
-  vm_name         = var.vm_name
-  bus_type        = "paravirtual"
-  size_in_mb      = var.vm_disk_size
-  bus_number      = 0
-  unit_number     = 0
-  storage_profile = var.vdc_storage_name
-  allow_vm_reboot = true
-}
-
 resource "vcd_vapp_vm" "web1" {
   vapp_name     = var.vapp_name
   name          = var.vm_name
@@ -24,6 +13,15 @@ resource "vcd_vapp_vm" "web1" {
   memory_hot_add_enabled=true
   power_on=true
 
+    override_template_disk {
+    bus_type        = "paravirtual"
+    size_in_mb      = var.vm_disk_size
+    bus_number      = 0
+    unit_number     = 0
+    iops            = 0
+  }
+
+
 
   network {
     type               = "org"
@@ -32,14 +30,7 @@ resource "vcd_vapp_vm" "web1" {
     ip                 = var.vm_ip
     adapter_type       = var.adapter_type
     is_primary         = true
-  }
-  
-  disk {
-    name        = "Disk"
-    bus_number  = 0
-    unit_number = 0
-  }
-  
+  } 
  
   customization {
     enabled                    = true
