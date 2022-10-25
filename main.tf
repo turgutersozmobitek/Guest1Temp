@@ -37,7 +37,6 @@ resource "vcd_vapp_vm" "web1" {
     change_sid                 = true
     allow_local_admin_password = true
     admin_password             = var.vm_admin_password
-    must_change_password_on_first_login = true
     # Other customization options to override the ones from template
   }
 
