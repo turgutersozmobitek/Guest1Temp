@@ -80,11 +80,6 @@ variable "vm_disk_size" {
     default     = "list"
 }
 
-variable "vdc_storage_name" {
-    type        = string
-    default     = "list"
-    description = "Storage Policy"
-}
 
 
 variable "catalog_name" {
